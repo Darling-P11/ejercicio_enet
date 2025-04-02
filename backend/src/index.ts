@@ -4,6 +4,7 @@ import cors from 'cors';
 import { AppDataSource } from './config/data-source';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes'; 
+import clientRoutes from './routes/client.routes';
 
 dotenv.config();
 
@@ -21,7 +22,7 @@ app.get('/', (_req, res) => {
 // ✅ Aquí conectas tus rutas
 app.use('/api', userRoutes);
 app.use('/api/users', userRoutes);
-
+app.use('/api/clientes', clientRoutes);
 // Inicializa la base de datos y levanta el servidor
 AppDataSource.initialize()
   .then(() => {
