@@ -5,6 +5,7 @@ import { AppDataSource } from './config/data-source';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes'; 
 import clientRoutes from './routes/client.routes';
+import turnoRoutes from './routes/turno.routes';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.get('/', (_req, res) => {
 app.use('/api', userRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/clientes', clientRoutes);
+app.use('/api/turnos', turnoRoutes);
 // Inicializa la base de datos y levanta el servidor
 AppDataSource.initialize()
   .then(() => {

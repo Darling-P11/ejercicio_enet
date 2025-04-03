@@ -3,6 +3,8 @@ import { DataSource } from 'typeorm';
 import { User } from '../entities/User';
 ; // luego lo creamos
 import { Client } from '../entities/Client';
+import { Turno } from '../entities/Turno';
+
 
 
 export const AppDataSource = new DataSource({
@@ -14,7 +16,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || 'enet_db',
   synchronize: true,
   logging: false,
-  entities: [User, Client],
+  entities: [User, Client, Turno],
   migrations: [],
   subscribers: [],
 });
