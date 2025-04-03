@@ -4,6 +4,8 @@ import { User } from '../entities/User';
 ; // luego lo creamos
 import { Client } from '../entities/Client';
 import { Turno } from '../entities/Turno';
+import { Servicio } from '../entities/Servicio';
+import { Contrato } from '../entities/Contrato';
 
 
 
@@ -16,7 +18,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || 'enet_db',
   synchronize: true,
   logging: false,
-  entities: [User, Client, Turno],
+  entities: [User, Client, Turno, Contrato,Servicio],
   migrations: [],
   subscribers: [],
 });

@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes'; 
 import clientRoutes from './routes/client.routes';
 import turnoRoutes from './routes/turno.routes';
+import contratoRoutes from './routes/contrato.routes';
+import servicioRoutes from './routes/servicio.routes';
 
 dotenv.config();
 
@@ -25,6 +27,8 @@ app.use('/api', userRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/clientes', clientRoutes);
 app.use('/api/turnos', turnoRoutes);
+app.use('/api/contratos', contratoRoutes);
+app.use('/api/servicios', servicioRoutes);
 // Inicializa la base de datos y levanta el servidor
 AppDataSource.initialize()
   .then(() => {
