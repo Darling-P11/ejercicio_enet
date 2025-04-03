@@ -8,6 +8,8 @@ import clientRoutes from './routes/client.routes';
 import turnoRoutes from './routes/turno.routes';
 import contratoRoutes from './routes/contrato.routes';
 import servicioRoutes from './routes/servicio.routes';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './config/swagger';
 
 dotenv.config();
 
@@ -29,6 +31,7 @@ app.use('/api/clientes', clientRoutes);
 app.use('/api/turnos', turnoRoutes);
 app.use('/api/contratos', contratoRoutes);
 app.use('/api/servicios', servicioRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Inicializa la base de datos y levanta el servidor
 AppDataSource.initialize()
   .then(() => {
