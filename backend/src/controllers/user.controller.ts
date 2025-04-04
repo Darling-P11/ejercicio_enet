@@ -105,5 +105,24 @@ export class UserController {
   
     return res.json({ message: 'Usuario aprobado correctamente' });
   }
+
+  static async eliminarUsuario(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+  
+    const usuario = await userRepo.findOneBy({ id: parseInt(id) });
+    if (!usuario) return res.status(404).json({ message: 'Usuario no encontrado' });
+  
+    usuario.estado = 'inactivo';
+    await userRepo.save(usuario);
+  
+    return res.json({ message: 'Usuario inactivado correctamente' });
+  }
+
+  static async listarUsuarios(req: Request, res: Response): Promise<Response> {
+    const usuarios = await userRepo.find({ where: { estado: 'activo' } });
+    return res.json(usuarios);
+  }
+  
+  
   
 }

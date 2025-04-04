@@ -85,4 +85,22 @@ export class ContratoController {
 
     return res.json({ message: 'Contrato cancelado' });
   }
+
+  static async eliminarContrato(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const contrato = await contratoRepo.findOneBy({ id: parseInt(id) });
+    if (!contrato) return res.status(404).json({ message: 'Contrato no encontrado' });
+  
+    contrato.estado = 'inactivo';
+    await contratoRepo.save(contrato);
+  
+    return res.json({ message: 'Contrato eliminado lógicamente' });
+  }
+
+  static async listarContratos(req: Request, res: Response): Promise<Response> {
+    const contratos = await contratoRepo.find({ where: { estado: 'activo' } });
+    return res.json(contratos);
+  }
+  
+  
 }

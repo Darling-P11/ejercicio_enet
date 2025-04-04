@@ -42,13 +42,13 @@ export class TurnoController {
       }
       
 
-  static async listarTurnos(req: Request, res: Response): Promise<Response> {
-    const turnos = await turnoRepo.find({
-      relations: ['cajero', 'cliente'],
-      order: { fecha: 'DESC' },
-    });
-    return res.json(turnos);
-  }
+      static async listarTurnos(req: Request, res: Response): Promise<Response> {
+        const turnos = await turnoRepo.find({
+          where: { estado: 'activo' },
+          relations: ['cajero', 'cliente'],
+        });
+        return res.json(turnos);
+      }
 
   static async finalizarTurno(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
@@ -60,4 +60,17 @@ export class TurnoController {
 
     return res.json({ message: 'Turno finalizado' });
   }
+
+  static async eliminarTurno(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const turno = await turnoRepo.findOneBy({ id: parseInt(id) });
+    if (!turno) return res.status(404).json({ message: 'Turno no encontrado' });
+  
+    turno.estado = 'inactivo';
+    await turnoRepo.save(turno);
+  
+    return res.json({ message: 'Turno eliminado lógicamente' });
+  }
+
+  
 }
