@@ -1,0 +1,1 @@
+# Servicios globales como auth, guards, interceptors

@@ -1,0 +1,1 @@
+# Componentes compartidos como navbar, loader, etc.
