@@ -10,6 +10,10 @@ import { swaggerSpec } from './config/swagger';
 import authRoutes from './routes/auth.routes';
 import rolRoutes from './routes/rol.routes';
 import userStatusRoutes from './routes/userstatus.routes';
+import methodPaymentRoutes from './routes/methodpayment.routes';
+import statusContractRoutes from './routes/statuscontract.routes';
+import attentionTypeRoutes from './routes/attentiontype.routes';
+import attentionStatusRoutes from './routes/attentionstatus.routes';
 
 dotenv.config();
 
@@ -30,6 +34,12 @@ app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/roles', rolRoutes);
 app.use('/api/userstatuses', userStatusRoutes);
+app.use('/api/methodpayments', methodPaymentRoutes);
+app.use('/api/statuscontracts', statusContractRoutes);
+app.use('/api/attentiontypes', attentionTypeRoutes);
+app.use('/api/attentionstatuses', attentionStatusRoutes);
+
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Inicializa la base de datos y levanta el servidor
