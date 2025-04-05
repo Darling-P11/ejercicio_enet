@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Contract } from './Contrato';
+import { Contract } from './Contract';
 import { Payments } from './Payments';
 import { Attention } from './Attention';
 
@@ -37,4 +37,6 @@ export class Client {
 
   @OneToMany(() => Attention, (a) => a.client)
   attentions!: Attention[];
+
+  
 }

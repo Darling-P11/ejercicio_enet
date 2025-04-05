@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Contracto } from './Contrato';
+import { Contract } from './Contract';
 
 @Entity()
 export class MethodPayment {
@@ -9,6 +9,6 @@ export class MethodPayment {
   @Column()
   description!: string;
 
-  @OneToMany(() => Contracto, (contract) => contracto.methodpayment)
-  contracts!: Contracto[];
+  @OneToMany(() => Contract, (contract) => contract.methodpayment)
+  contracts!: Contract[];
 }

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Contract } from './Contrato';
+import { Contract } from './Contract';
 
 @Entity()
 export class StatusContract {

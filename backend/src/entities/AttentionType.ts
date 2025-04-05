@@ -4,11 +4,13 @@ import { Attention } from './Attention';
 @Entity()
 export class AttentionType {
   @PrimaryColumn({ length: 3 })
-  attentiontypeid: string;
+  attentiontypeid!: string;
 
   @Column({ length: 100 })
-  description: string;
+  description!: string;
 
   @OneToMany(() => Attention, (attention) => attention.attentiontype)
-  attentions: Attention[];
+  attentions!: Attention[];
+
+  
 }

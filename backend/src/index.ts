@@ -15,6 +15,14 @@ import statusContractRoutes from './routes/statuscontract.routes';
 import attentionTypeRoutes from './routes/attentiontype.routes';
 import attentionStatusRoutes from './routes/attentionstatus.routes';
 import clientRoutes from './routes/client.routes';
+import turnRoutes from './routes/turn.routes';
+import cashRoutes from './routes/cash.routes';
+import serviceRoutes from './routes/service.routes';
+import deviceRoutes from './routes/device.routes';
+import contractRoutes from './routes/contract.routes';
+import userCashRoutes from './routes/usercash.routes';
+import paymentRoutes from './routes/payment.routes';
+import attentionRoutes from './routes/attention.routes';
 
 dotenv.config();
 
@@ -40,6 +48,14 @@ app.use('/api/statuscontracts', statusContractRoutes);
 app.use('/api/attentiontypes', attentionTypeRoutes);
 app.use('/api/attentionstatuses', attentionStatusRoutes);
 app.use('/api/clients', clientRoutes);
+app.use('/api/turns', turnRoutes);
+app.use('/api/cash', cashRoutes);
+app.use('/api/services', serviceRoutes);
+app.use('/api/devices', deviceRoutes);
+app.use('/api/contracts', contractRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/usercash', userCashRoutes);
+app.use('/api/attentions', attentionRoutes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

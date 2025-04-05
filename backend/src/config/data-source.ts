@@ -3,11 +3,21 @@ import { DataSource } from 'typeorm';
 import { User } from '../entities/User';
 ; // luego lo creamos
 import { Client } from '../entities/Client';
-import { Turno } from '../entities/Turno';
-import { Servicio } from '../entities/Servicio';
-import { Contrato } from '../entities/Contrato';
+import { Attention } from '../entities/Attention';
+import { AttentionStatus } from '../entities/AttentionStatus';
+import { AttentionType } from '../entities/AttentionType';
+import { Cash } from '../entities/Cash';
+import { Contract } from '../entities/Contract';
+import { Device } from '../entities/Device';
+import { MethodPayment } from '../entities/MethodPayment';
+import { Payments } from '../entities/Payments';
+import { Service } from '../entities/Service';
+import { StatusContract } from '../entities/StatusContract';
+import { UserCash } from '../entities/UserCash';
 import { Rol } from '../entities/Rol';
 import { UserStatus } from '../entities/UserStatus';
+import { Turn } from '../entities/Turn';
+import { userInfo } from 'os';
 
 
 
@@ -20,7 +30,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || 'enet_db',
   synchronize: true,
   logging: false,
-  entities: [User, Client, Turno, Contrato,Servicio,Rol,UserStatus],
+  entities: [Attention,AttentionStatus,AttentionType,Cash,Client,Contract,Device,MethodPayment,Payments,Rol,Service,StatusContract,Turn,User,UserCash,UserStatus],
   migrations: [],
   subscribers: [],
 });
