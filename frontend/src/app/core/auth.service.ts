@@ -28,9 +28,7 @@ export class AuthService {
   }
 
   getRole(): string | null {
-    const token = localStorage.getItem('token');
-    if (!token) return null;
-    const payload: any = jwtDecode(token);
-    return payload.rolname;
+    return localStorage.getItem('rol');
   }
+  
 }
