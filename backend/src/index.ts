@@ -8,6 +8,7 @@ import userRoutes from './routes/user.routes';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
 import authRoutes from './routes/auth.routes';
+import rolRoutes from './routes/rol.routes';
 
 dotenv.config();
 
@@ -26,7 +27,7 @@ app.get('/', (_req, res) => {
 app.use('/api', userRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
-
+app.use('/api/roles', rolRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Inicializa la base de datos y levanta el servidor
 AppDataSource.initialize()
