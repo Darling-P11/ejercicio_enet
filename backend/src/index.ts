@@ -14,6 +14,7 @@ import methodPaymentRoutes from './routes/methodpayment.routes';
 import statusContractRoutes from './routes/statuscontract.routes';
 import attentionTypeRoutes from './routes/attentiontype.routes';
 import attentionStatusRoutes from './routes/attentionstatus.routes';
+import clientRoutes from './routes/client.routes';
 
 dotenv.config();
 
@@ -38,7 +39,7 @@ app.use('/api/methodpayments', methodPaymentRoutes);
 app.use('/api/statuscontracts', statusContractRoutes);
 app.use('/api/attentiontypes', attentionTypeRoutes);
 app.use('/api/attentionstatuses', attentionStatusRoutes);
-
+app.use('/api/clients', clientRoutes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

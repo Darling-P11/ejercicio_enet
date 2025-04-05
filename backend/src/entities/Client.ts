@@ -1,34 +1,40 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Contract } from './Contrato';
+import { Payments } from './Payments';
+import { Attention } from './Attention';
 
 @Entity()
 export class Client {
   @PrimaryGeneratedColumn()
-  id!: number;
+  clientid!: number;
 
-  @Column()
-  nombres!: string;
+  @Column({ length: 50 })
+  name!: string;
 
-  @Column()
-  apellidos!: string;
+  @Column({ length: 50 })
+  lastname!: string;
 
-  @Column({ unique: true })
-  identificacion!: string;
+  @Column({ unique: true, length: 13 })
+  identification!: string;
 
-  @Column()
-  correo!: string;
+  @Column({ length: 120 })
+  email!: string;
 
-  @Column()
-  telefono!: string;
-
-  @Column({ length: 100 })
-  direccion!: string;
+  @Column({ unique: true, length: 13 })
+  phonenumber!: string;
 
   @Column({ length: 100 })
-  referencia!: string;
+  address!: string;
 
-  @Column({ default: 'activo' }) // activo | inactivo
-  estado!: string;
+  @Column({ length: 100 })
+  referenceaddress!: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  creadoEn!: Date;
+  @OneToMany(() => Contract, (c) => c.client)
+  contracts!: Contract[];
+
+  @OneToMany(() => Payments, (p) => p.client)
+  payments!: Payments[];
+
+  @OneToMany(() => Attention, (a) => a.client)
+  attentions!: Attention[];
 }
