@@ -1,12 +1,18 @@
+// validaciones para username y contraseña
 export const isValidUsername = (username: string): boolean => {
-    const regex = /^[A-Za-z0-9]{8,20}$/;
-    return regex.test(username) && /\d/.test(username);
-  };
-  
-  export const isValidPassword = (password: string): boolean => {
-    const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,30}$/;
-    return regex.test(password);
-  };
+  const usernameRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/;
+  return usernameRegex.test(username);
+};
+
+export const isValidPassword = (password: string): boolean => {
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,30}$/;
+  return passwordRegex.test(password);
+};
+
+
+
+
+
   export const isValidIdentificacion = (id: string): boolean => {
     return /^\d{10,13}$/.test(id);
   };

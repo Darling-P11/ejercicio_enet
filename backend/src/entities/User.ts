@@ -1,29 +1,44 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn
+} from 'typeorm';
+import { Rol } from './Rol';
+import { UserStatus } from './UserStatus';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id!: number;
+  userid!: number;
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 20 })
   username!: string;
+
+  @Column()
+  email!: string;
 
   @Column()
   password!: string;
 
   @Column()
-  role!: string;
+  createdate!: Date;
 
-  @Column({ default: true })
-  active!: boolean;
-  
-  @Column({ default: 'pendiente' }) // pendiente | activo | bloqueado
-  estado!: string;
+  @Column({ nullable: true })
+  usercreate!: string;
 
-  @Column({ default: false })
-  aprobado!: boolean;
+  @Column({ nullable: true })
+  userapproval!: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt!: Date;
+  @Column({ nullable: true })
+  dateapproval!: Date;
 
+  @ManyToOne(() => Rol, (rol) => rol.users)
+  @JoinColumn({ name: 'rolid' })
+  rol!: Rol;
+
+  @ManyToOne(() => UserStatus, (status) => status.users)
+  @JoinColumn({ name: 'userstatus_statusid' })
+  userstatus!: UserStatus;
 }

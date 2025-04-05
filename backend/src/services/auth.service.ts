@@ -1,21 +1,29 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import { AppDataSource } from '../config/data-source';
 import { User } from '../entities/User';
-
-const SECRET = process.env.JWT_SECRET || 'clave_secreta';
+import { comparePasswords } from '../utils/hash';
+import { generateToken } from '../utils/jwt';
 
 export class AuthService {
-  static async hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, 10);
-  }
+  private userRepo = AppDataSource.getRepository(User);
 
-  static async comparePasswords(password: string, hash: string): Promise<boolean> {
-    return bcrypt.compare(password, hash);
-  }
-
-  static generateToken(user: User): string {
-    return jwt.sign({ id: user.id, username: user.username, role: user.role }, SECRET, {
-      expiresIn: '8h',
+  async login(username: string, password: string) {
+    const user = await this.userRepo.findOne({
+      where: { username },
+      relations: ['rol', 'userstatus']
     });
+
+    if (!user) throw new Error('Usuario no encontrado.');
+    if (user.userstatus.description !== 'activo') throw new Error('Usuario inactivo o no aprobado.');
+
+    const isMatch = await comparePasswords(password, user.password);
+    if (!isMatch) throw new Error('Contraseña incorrecta.');
+
+    const token = generateToken({
+      userid: user.userid,
+      username: user.username,
+      rol: user.rol.rolname
+    });
+
+    return { token, user: { username: user.username, rol: user.rol.rolname } };
   }
 }

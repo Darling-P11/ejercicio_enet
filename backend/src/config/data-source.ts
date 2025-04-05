@@ -6,6 +6,8 @@ import { Client } from '../entities/Client';
 import { Turno } from '../entities/Turno';
 import { Servicio } from '../entities/Servicio';
 import { Contrato } from '../entities/Contrato';
+import { Rol } from '../entities/Rol';
+import { UserStatus } from '../entities/UserStatus';
 
 
 
@@ -18,7 +20,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || 'enet_db',
   synchronize: true,
   logging: false,
-  entities: [User, Client, Turno, Contrato,Servicio],
+  entities: [User, Client, Turno, Contrato,Servicio,Rol,UserStatus],
   migrations: [],
   subscribers: [],
 });

@@ -1,24 +1,46 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken } from '../utils/auth';
+import jwt from 'jsonwebtoken';
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction): void => {
+const SECRET = process.env.JWT_SECRET || 'default_secret';
 
+interface JwtPayload {
+  userid: number;
+  username: string;
+  rol: string;
+}
+
+export const authenticateJWT = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    res.status(403).json({ message: 'Token requerido' });
+
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    res.status(401).json({ error: 'Token no proporcionado' });
     return;
   }
-  
 
   const token = authHeader.split(' ')[1];
 
   try {
-    const decoded = verifyToken(token);
-    (req as any).user = decoded;
+    const decoded = jwt.verify(token, SECRET) as JwtPayload;
+    req.user = decoded;
     next();
   } catch (err) {
-    res.status(401).json({ message: 'Token inválido o expirado' });
-    return;
+    res.status(403).json({ error: 'Token inválido o expirado' });
   }
-  
+};
+
+export const authorizeRoles = (...roles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction): void => {
+    const user = req.user as JwtPayload;
+
+    if (!roles.includes(user.rol)) {
+      res.status(403).json({ error: 'Acceso denegado por rol' });
+      return;
+    }
+
+    next();
+  };
 };
