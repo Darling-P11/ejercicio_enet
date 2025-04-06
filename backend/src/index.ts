@@ -37,6 +37,7 @@ app.get('/', (_req, res) => {
   res.send('API funcionando...');
 });
 
+
 // ✅ Aquí conectas tus rutas
 app.use('/api', userRoutes);
 app.use('/api/users', userRoutes);

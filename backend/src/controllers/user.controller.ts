@@ -64,4 +64,10 @@ export const deactivateUser = async (req: Request, res: Response) => {
   }
 };
 
+export const countPendingUsers = async (_req: Request, res: Response) => {
+  const service = new UserService();
+  const count = await service.countPendingUsers();
+  res.json(count);
+};
+
 

@@ -16,3 +16,15 @@ export const getTurns = async (_req: Request, res: Response) => {
   const turns = await service.getAllTurns();
   res.json(turns);
 };
+
+export const countTodayAllTurns = async (_req: Request, res: Response) => {
+  const count = await service.countTodayAll();
+  res.json(count);
+};
+
+export const countTurnsByGestorToday = async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.id);
+  const count = await service.countTodayByGestor(userId);
+  res.json(count);
+};
+

@@ -32,27 +32,17 @@ export class LoginComponent {
     this.auth.login(username, password).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
-        localStorage.setItem('rol', response.user.rol); // 👈 Guardamos el rol explícitamente
-    
-        const rol = response.user.rol;
-        console.log('ROL DETECTADO:', rol);
-    
-        if (rol === 'admin') {
-          this.router.navigate(['/dashboard/admin']);
-        } else if (rol === 'gestor') {
-          this.router.navigate(['/dashboard/gestor']);
-        } else if (rol === 'cajero') {
-          this.router.navigate(['/dashboard/cajero']);
-        } else {
-          this.router.navigate(['/dashboard']);
-        }
+        localStorage.setItem('rol', response.user.rol); // Guardamos el rol explícitamente
+  
+        // Solo redireccionamos al layout base
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.error = err.error?.message || 'Error al iniciar sesión';
       }
     });
-    
   }
+  
   
   
   

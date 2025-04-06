@@ -30,5 +30,19 @@ export class AuthService {
   getRole(): string | null {
     return localStorage.getItem('rol');
   }
+  getUserName(): string {
+    const token = localStorage.getItem('token');
+    if (!token) return '';
+    const payload: any = jwtDecode(token);
+    return payload.username;
+  }
+  
+  getUserId(): number {
+    const token = localStorage.getItem('token');
+    if (!token) return 0;
+    const payload: any = jwtDecode(token);
+    return payload.userid;
+  }
+  
   
 }

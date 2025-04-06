@@ -1,0 +1,19 @@
+<div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3>Menú</h3>
+      <ul>
+        <li><a routerLink="/dashboard">Inicio</a></li>
+        <!-- Agrega enlaces a módulos aquí -->
+      </ul>
+    </aside>
+  
+    <main class="content">
+      <header>
+        <span>Usuario: {{ username }} | Rol: {{ role }}</span>
+        <button (click)="logout()">Cerrar sesión</button>
+      </header>
+  
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  

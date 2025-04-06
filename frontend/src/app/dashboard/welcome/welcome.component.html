@@ -1,0 +1,11 @@
+<h2>Bienvenido, {{ nombreUsuario }} ({{ rol.toUpperCase() }})</h2>
+
+<div *ngIf="rol === 'admin'">
+  <p><strong>Total de turnos atendidos hoy:</strong> {{ totalTurnos }}</p>
+</div>
+
+<div *ngIf="rol === 'gestor'">
+  <p><strong>Turnos asignados por ti hoy:</strong> {{ totalTurnos }}</p>
+  <p><strong>Usuarios pendientes de aprobación:</strong> {{ usuariosPendientes }}</p>
+</div>
+

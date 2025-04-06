@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerUser } from '../controllers/user.controller';
+import { registerUser,countPendingUsers } from '../controllers/user.controller';
 import { authenticateJWT, authorizeRoles } from '../middlewares/auth.middleware';
 import {
   getAllUsers,
@@ -51,6 +51,8 @@ router.delete(
   authorizeRoles('admin'),
   deactivateUser
 );
+
+router.get('/pending-count', authenticateJWT, authorizeRoles('gestor'), countPendingUsers);
 
 
 

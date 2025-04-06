@@ -1,0 +1,15 @@
+<div class="layout">
+    <aside class="sidebar">
+      <h3>Menú</h3>
+      <ul>
+        <li *ngFor="let item of menu" [routerLink]="item.path">
+          {{ item.label }}
+        </li>
+      </ul>
+    </aside>
+  
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  

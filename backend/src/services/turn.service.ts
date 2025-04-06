@@ -4,8 +4,10 @@ import { User } from '../entities/User';
 import { Cash } from '../entities/Cash';
 import { AttentionType } from '../entities/AttentionType';
 import { generateTurnCode } from '../utils/turn-generator';
+import { Between } from 'typeorm';
 
 export class TurnService {
+  private repo = AppDataSource.getRepository(Turn);
   private turnRepo = AppDataSource.getRepository(Turn);
   private userRepo = AppDataSource.getRepository(User);
   private cashRepo = AppDataSource.getRepository(Cash);
@@ -51,4 +53,36 @@ export class TurnService {
       order: { createdate: 'DESC' }
     });
   }
+
+  async countTodayAll() {
+    const today = new Date();
+    const start = new Date(today.setHours(0, 0, 0, 0));
+    const end = new Date(today.setHours(23, 59, 59, 999));
+  
+    return await this.repo.count({
+      where: {
+        createdate: Between(start, end)
+      }
+    });
+  }
+  
+  
+  async countTodayByGestor(userId: number) {
+    const today = new Date();
+    const start = new Date(today.setHours(0, 0, 0, 0));
+    const end = new Date(today.setHours(23, 59, 59, 999));
+  
+    return await this.repo.count({
+      where: {
+        createdate: Between(start, end),
+        user: { userid: userId }
+      },
+      relations: ['user']
+    });
+  }
+  
+  
+  
+
+  
 }

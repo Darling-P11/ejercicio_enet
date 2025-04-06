@@ -1,0 +1,19 @@
+<div class="dashboard-layout">
+    <nav class="sidebar">
+      <h3>Menú</h3>
+      <ul>
+        <li><a routerLink="/dashboard/usuarios">Usuarios</a></li>
+        <li><a routerLink="/dashboard/clientes">Clientes</a></li>
+        <li><a routerLink="/dashboard/contratos">Contratos</a></li>
+        <!-- Agrega más opciones según las fases -->
+      </ul>
+      <button (click)="logout()">Cerrar Sesión</button>
+    </nav>
+  
+    <main>
+      <h2>Bienvenido, {{ user?.username }}</h2>
+      <p>Rol: {{ user?.rolname }}</p>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  

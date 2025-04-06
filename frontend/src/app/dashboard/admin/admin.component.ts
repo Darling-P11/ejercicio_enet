@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { WelcomeComponent } from '../../dashboard/welcome/welcome.component';
 
 @Component({
+  standalone: true,
   selector: 'app-admin',
-  imports: [],
+  imports: [WelcomeComponent],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent {
-
-}
+export class AdminComponent {}

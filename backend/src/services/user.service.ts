@@ -4,8 +4,11 @@ import { Rol } from '../entities/Rol';
 import { UserStatus } from '../entities/UserStatus';
 import { hashPassword } from '../utils/hash';
 import { isValidUsername, isValidPassword } from '../utils/validators';
+import { Turn } from '../entities/Turn';
+
 
 export class UserService {
+  private repo = AppDataSource.getRepository(Turn);
   private userRepo = AppDataSource.getRepository(User);
   private rolRepo = AppDataSource.getRepository(Rol);
   private statusRepo = AppDataSource.getRepository(UserStatus);
@@ -118,6 +121,19 @@ export class UserService {
     user.userstatus = status!;
     return await this.userRepo.save(user);
   }
+
+  async countPendingUsers() {
+    return await this.repo
+      .createQueryBuilder('user')
+      .leftJoin('user.userstatus', 'status')
+      .where('status.statusid = :id', { id: 3 }) // ID de "pendiente"
+      .getCount();
+  }
+  
+  
+  
+  
+  
   
   
   
